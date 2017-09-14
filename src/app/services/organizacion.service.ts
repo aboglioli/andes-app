@@ -14,7 +14,6 @@ export class OrganizacionService {
      * @param {any} params Opciones de busqueda
      */
     get(params: any): Observable<IOrganizacion[]> {
-        console.log('url ', this.organizacionUrl);
         return this.server.get(this.organizacionUrl, { params: params, showError: true });
     }
 
@@ -22,7 +21,7 @@ export class OrganizacionService {
      * Metodo getById. Trae el objeto organizacion por su Id.
      * @param {String} id Busca por Id
      */
-    getById(id: String): Observable<IOrganizacion> {
+    getById(id: any): Observable<IOrganizacion> {
         return this.server.get(this.organizacionUrl + '/' + id, null);
     }
 

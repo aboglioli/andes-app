@@ -31,9 +31,12 @@ import { SmsService } from './../../../services/turnos/sms.service';
 import { TurnoService } from './../../../services/turnos/turno.service';
 import { LlavesTipoPrestacionService } from './../../../services/llaves/llavesTipoPrestacion.service';
 import { SipsService } from './../../../services/legacy/sips.service';
+import { OrganizacionService} from './../../../services/organizacion.service';
+
+
 
 // Utils
-import * as cacheSips from '../../../utils/operacionesCacheSips';
+import { OperacionesSips } from '../../../utils/operacionesCacheSips';
 
 @Component({
     selector: 'dar-turnos',
@@ -132,6 +135,7 @@ export class DarTurnosComponent implements OnInit {
         public serviceListaEspera: ListaEsperaService,
         public serviceTurno: TurnoService,
         public servicePaciente: PacienteService,
+        public serviceOrganizacion: OrganizacionService,
         public serviceLegacySips: SipsService,
         public servicioTipoPrestacion: TipoPrestacionService,
         public servicioPrestacionPaciente: PrestacionPacienteService,
@@ -811,7 +815,6 @@ export class DarTurnosComponent implements OnInit {
     darTurno() {
         // Ver si cambió el estado de la agenda desde otro lado
         this.serviceAgenda.getById(this.agenda.id).subscribe(agd => {
-
             if (agd.estado !== 'disponible' && agd.estado !== 'publicada') {
 
                 this.plex.info('warning', 'Esta agenda ya no está disponible.');
@@ -893,11 +896,8 @@ export class DarTurnosComponent implements OnInit {
                     }
 
                     // Cache de turnos para sips
-                    let dto = cacheSips.cacheDarTurno(this.paciente, agd, this.turno);
-                    this.serviceLegacySips.save(dto).subscribe(rta => {
-                        debugger;
-                        return rta;
-                    });
+                    let opSips = new OperacionesSips(this.serviceOrganizacion, this.serviceLegacySips);
+                    let dto = opSips.cacheDarTurno(this.paciente, agd, this.turno);
 
                 }, (err) => {
                     // Si el turno no pudo ser otorgado, se verifica si el bloque permite citar por segmento
