@@ -96,6 +96,9 @@ import { SisaService } from './services/fuentesAutenticas/servicioSisa.service';
 import { SintysService } from './services/fuentesAutenticas/servicioSintys.service';
 import { AnsesService } from './services/fuentesAutenticas/servicioAnses.service';
 
+// Sistemas Legacy: Sips, HPN
+import { SipsService } from './services/legacy/sips.service';
+
 // Componentes
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -545,6 +548,7 @@ import { routing, appRoutingProviders } from './app.routing';
         SisaService,
         SintysService,
         AnsesService,
+        SipsService,
         LogPacienteService,
         UsuarioService
     ]

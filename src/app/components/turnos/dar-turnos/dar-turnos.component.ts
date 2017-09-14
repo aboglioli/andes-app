@@ -30,6 +30,10 @@ import { PrestacionPacienteService } from '../../../services/rup/prestacionPacie
 import { SmsService } from './../../../services/turnos/sms.service';
 import { TurnoService } from './../../../services/turnos/turno.service';
 import { LlavesTipoPrestacionService } from './../../../services/llaves/llavesTipoPrestacion.service';
+import { SipsService } from './../../../services/legacy/sips.service';
+
+// Utils
+import * as cacheSips from '../../../utils/operacionesCacheSips';
 
 @Component({
     selector: 'dar-turnos',
@@ -128,6 +132,7 @@ export class DarTurnosComponent implements OnInit {
         public serviceListaEspera: ListaEsperaService,
         public serviceTurno: TurnoService,
         public servicePaciente: PacienteService,
+        public serviceLegacySips: SipsService,
         public servicioTipoPrestacion: TipoPrestacionService,
         public servicioPrestacionPaciente: PrestacionPacienteService,
         private llaveTipoPrestacionService: LlavesTipoPrestacionService,
@@ -886,6 +891,14 @@ export class DarTurnosComponent implements OnInit {
                     } else {
                         this.buscarPaciente();
                     }
+
+                    // Cache de turnos para sips
+                    let dto = cacheSips.cacheDarTurno(this.paciente, agd, this.turno);
+                    this.serviceLegacySips.save(dto).subscribe(rta => {
+                        debugger;
+                        return rta;
+                    });
+
                 }, (err) => {
                     // Si el turno no pudo ser otorgado, se verifica si el bloque permite citar por segmento
                     // En este caso se trata de dar nuevamente un turno con el siguiente turno disponible con el mismo horario
