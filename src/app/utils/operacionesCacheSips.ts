@@ -18,7 +18,7 @@ export function cacheDarTurno(unPaciente, unaAgenda, unTurno) {
         organizacion: unaAgenda.organizacion, // Objeto Organización
         tipoPrestacion: unTurno.tipoPrestacion, // Objeto tipo de prestación donde ya se que son las turneables y de aquí sale la especialiad para SIPS
         profesionales: unaAgenda.profesionales, // Los profesionales correspondiente a esta agenda (puede ser más de uno)
-        horaInicio: unTurno.horaInicio,        
+        horaInicio: unTurno.horaInicio,
     };
     let dtoAgendaCache = {
         paciente: paciente,
