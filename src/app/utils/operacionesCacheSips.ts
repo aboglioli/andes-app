@@ -8,13 +8,12 @@ export class OperacionesSips {
     constructor(
         public serviceOrganizacion: OrganizacionService,
         public serviceLegacySips: SipsService
-    ) {
-    }
+    ) {}
 
     cacheDarTurno(unPaciente, unaAgenda, unTurno) {
 
         this.serviceOrganizacion.getById(unaAgenda.organizacion.id).subscribe(unaOrganizacion => {
-            let paciente = {
+            let pacienteTurno = {
                 id: unPaciente.id,
                 documento: unPaciente.documento,
                 apellido: unPaciente.apellido,
@@ -23,20 +22,28 @@ export class OperacionesSips {
                 fechaNacimiento: unPaciente.fechaNacimiento
             };
             let agenda = {
-                estado: unaAgenda.estado, // Estado gral de la agenda
-                bloque: unaAgenda.bloques,
+                organizacion: unaOrganizacion,
+                profesionales: unaAgenda.profesionales,
+                tipoPrestaciones: unaAgenda.tipoPrestaciones,
+                espacioFisico: unaAgenda.espacioFisico,
+                estado: unaAgenda.estado,
+                horaInicio: unaAgenda.horaInicio,
+                horaFin: unaAgenda.horaFin
             };
             let turno = {
-                organizacion: unaOrganizacion, // Objeto Organización armado usando el servicio
-                tipoPrestacion: unTurno.tipoPrestacion, // Objeto tipo de prestación donde ya se que son las turneables y de aquí sale la especialiad para SIPS
-                profesionales: unaAgenda.profesionales, // Los profesionales correspondiente a esta agenda (puede ser más de uno)
+                idAgenda: unaAgenda.id,
+                estado: unTurno.estado,
                 horaInicio: unTurno.horaInicio,
+                tipoTurno: unTurno.tipoTurno,
+                paciente: pacienteTurno
             };
+
+            // Genero el DTO de esta forma para facilitar el acceso
             let dtoAgendaCache = {
-                paciente: paciente,
                 agenda: agenda,
                 turno: turno
             };
+            debugger;
             this.serviceLegacySips.save(dtoAgendaCache).subscribe(rta => {
                 return rta;
             });
