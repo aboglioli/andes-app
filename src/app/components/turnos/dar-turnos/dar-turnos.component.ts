@@ -30,8 +30,8 @@ import { PrestacionPacienteService } from '../../../services/rup/prestacionPacie
 import { SmsService } from './../../../services/turnos/sms.service';
 import { TurnoService } from './../../../services/turnos/turno.service';
 import { LlavesTipoPrestacionService } from './../../../services/llaves/llavesTipoPrestacion.service';
-import { SipsService } from './../../../services/legacy/sips.service';
-import { OrganizacionService} from './../../../services/organizacion.service';
+// import { SipsService } from './../../../services/legacy/sips.service';
+// import { OrganizacionService} from './../../../services/organizacion.service';
 
 
 
@@ -135,8 +135,8 @@ export class DarTurnosComponent implements OnInit {
         public serviceListaEspera: ListaEsperaService,
         public serviceTurno: TurnoService,
         public servicePaciente: PacienteService,
-        public serviceOrganizacion: OrganizacionService,
-        public serviceLegacySips: SipsService,
+        // public serviceOrganizacion: OrganizacionService,
+        // public serviceLegacySips: SipsService,
         public servicioTipoPrestacion: TipoPrestacionService,
         public servicioPrestacionPaciente: PrestacionPacienteService,
         private llaveTipoPrestacionService: LlavesTipoPrestacionService,
@@ -895,9 +895,9 @@ export class DarTurnosComponent implements OnInit {
                         this.buscarPaciente();
                     }
 
-                    // Cache de turnos para sips
-                    let opSips = new OperacionesSips(this.serviceOrganizacion, this.serviceLegacySips);
-                    let dto = opSips.cacheDarTurno(this.paciente, agd, this.turno);
+                    // Cache de turnos para sips LO SACAMOS DE ACA POR EL MOMENTO
+                   // let opSips = new OperacionesSips(this.serviceOrganizacion, this.serviceLegacySips);
+                   // let dto = opSips.cacheDarTurno(this.paciente, agd, this.turno);
 
                 }, (err) => {
                     // Si el turno no pudo ser otorgado, se verifica si el bloque permite citar por segmento
