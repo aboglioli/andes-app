@@ -33,11 +33,6 @@ import { LlavesTipoPrestacionService } from './../../../services/llaves/llavesTi
 // import { SipsService } from './../../../services/legacy/sips.service';
 // import { OrganizacionService} from './../../../services/organizacion.service';
 
-
-
-// Utils
-import { OperacionesSips } from '../../../utils/operacionesCacheSips';
-
 @Component({
     selector: 'dar-turnos',
     templateUrl: 'dar-turnos.html'
@@ -894,11 +889,6 @@ export class DarTurnosComponent implements OnInit {
                     } else {
                         this.buscarPaciente();
                     }
-
-                    // Cache de turnos para sips LO SACAMOS DE ACA POR EL MOMENTO
-                   // let opSips = new OperacionesSips(this.serviceOrganizacion, this.serviceLegacySips);
-                   // let dto = opSips.cacheDarTurno(this.paciente, agd, this.turno);
-
                 }, (err) => {
                     // Si el turno no pudo ser otorgado, se verifica si el bloque permite citar por segmento
                     // En este caso se trata de dar nuevamente un turno con el siguiente turno disponible con el mismo horario
