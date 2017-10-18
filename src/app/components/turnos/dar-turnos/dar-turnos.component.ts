@@ -30,6 +30,8 @@ import { ListaEsperaService } from '../../../services/turnos/listaEspera.service
 import { SmsService } from './../../../services/turnos/sms.service';
 import { TurnoService } from './../../../services/turnos/turno.service';
 import { LlavesTipoPrestacionService } from './../../../services/llaves/llavesTipoPrestacion.service';
+// import { SipsService } from './../../../services/legacy/sips.service';
+// import { OrganizacionService} from './../../../services/organizacion.service';
 
 @Component({
     selector: 'dar-turnos',
@@ -148,6 +150,8 @@ export class DarTurnosComponent implements OnInit {
         public serviceListaEspera: ListaEsperaService,
         public serviceTurno: TurnoService,
         public servicePaciente: PacienteService,
+        // public serviceOrganizacion: OrganizacionService,
+        // public serviceLegacySips: SipsService,
         public servicioTipoPrestacion: TipoPrestacionService,
         public servicioPrestacionPaciente: PrestacionesService,
         private llaveTipoPrestacionService: LlavesTipoPrestacionService,
