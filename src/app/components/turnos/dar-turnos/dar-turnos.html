@@ -9,19 +9,19 @@
                     <header>
                         <div class="row align-items-center">
                             <div class="col-4">
-                                <plex-select *ngIf="!_solicitudPrestacion?.solicitud" [(ngModel)]="opciones.tipoPrestacion" (getData)="loadTipoPrestaciones($event)"
+                                <plex-select *ngIf="!_solicitudPrestacion?.solicitud  || _solicitudPrestacion.solicitud.registros.length === 0" [(ngModel)]="opciones.tipoPrestacion" (getData)="loadTipoPrestaciones($event)"
                                     placeholder="Tipos de Prestación" (change)="filtrar()" name="tipoPrestacion">
                                 </plex-select>
-                                <plex-select *ngIf="_solicitudPrestacion" [(ngModel)]="_solicitudPrestacion.solicitud.registros[0].concepto" (getData)="loadTipoPrestaciones($event)"
+                                <plex-select *ngIf="_solicitudPrestacion && _solicitudPrestacion.solicitud.registros.length > 0" [(ngModel)]="_solicitudPrestacion.solicitud.registros[0].concepto" (getData)="loadTipoPrestaciones($event)"
                                     placeholder="Tipos de Prestación" (change)="filtrar()" name="tipoPrestacion" [readonly]="true">
                                 </plex-select>
                             </div>
                             <!-- TODO: No funciona el filtro de profesional cuando es una solicitud de autocitacion -->
                             <div class="col-4">
-                                <plex-select *ngIf="!_solicitudPrestacion?.solicitud" [(ngModel)]="opciones.profesional" (getData)="loadProfesionales($event)"
+                                <plex-select *ngIf="!_solicitudPrestacion?.solicitud || _solicitudPrestacion.solicitud.registros.length === 0" [(ngModel)]="opciones.profesional" (getData)="loadProfesionales($event)"
                                     placeholder="Profesionales" labelField="apellido + ' ' + nombre" (change)="filtrar()" name="profesional">
                                 </plex-select>
-                                <plex-select *ngIf="_solicitudPrestacion" [(ngModel)]="_solicitudPrestacion.solicitud.profesional" (getData)="loadProfesionales($event)"
+                                <plex-select *ngIf="_solicitudPrestacion && _solicitudPrestacion.solicitud.registros.length > 0" [(ngModel)]="_solicitudPrestacion.solicitud.profesional" (getData)="loadProfesionales($event)"
                                     labelField="apellido + ' ' + nombre" (change)="filtrar()" name="profesional">
                                 </plex-select>
                             </div>
